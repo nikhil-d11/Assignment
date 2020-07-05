@@ -57,29 +57,17 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
         holder.rating.setText("  "+movie.getVote_average());
         //Log.d("testing image url",Constants.image_base_url+movie.getPoster_path());
 
-        Picasso.get().setLoggingEnabled(true);
-        Picasso.get().load(Constants.image_base_url+movie.getPoster_path())
+        //Picasso.get().setLoggingEnabled(true);
+        Picasso.with(context).load(Constants.image_base_url+movie.getPoster_path())
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .error(R.drawable.ic_launcher_background)
-                .into(holder.cover, new Callback() {
-                    @Override
-                    public void onSuccess() {
-                        Log.e("success","working");
-                    }
-
-                    @Override
-                    public void onError(Exception e) {
-                        Log.e("success","error");
-
-                    }
-                });
+                .into(holder.cover);
 
 
         holder.bookmark.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 movie.setBookmarked(isChecked);
-
                 if(isChecked){
                     InsertBookmark task=new InsertBookmark();
                     task.execute(movie);

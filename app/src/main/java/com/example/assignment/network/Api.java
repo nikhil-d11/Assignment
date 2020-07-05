@@ -24,6 +24,7 @@ import static com.example.assignment.network.ResponseParser.parse_search_result;
 public class Api {
 
 
+    //read about use of static
     public static void search_api(String query,String page_no,final INetworkCallback<ArrayList<Movie>> callback){
 
         //learn how to generalize this class
@@ -55,21 +56,22 @@ public class Api {
                 if (!response.isSuccessful()) {
                     throw new IOException("Unexpected code " + response);
                 } else {
-
-
                     try {
                         JSONObject jsonObject=new JSONObject(response.body().string());
                         //Log.d("testing parsing",""+jsonObject.getInt("total_pages"));
+                        //read about returning callback on the caller thread only
                         callback.OnSuccess(parse_search_result(jsonObject.getJSONArray("results")),jsonObject.getInt("total_pages"));
                         //Log.d("testing parsing time",""+jsonObject.getInt("total_pages"));
-
                     } catch (JSONException e) {
+                        callback.OnError(e);
                         e.printStackTrace();
                     }
                 }
             }
         });
     }
+
+
 
 
 }

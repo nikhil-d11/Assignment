@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase;
 
 import com.example.assignment.models.Movie;
 
-@Database(entities = {Movie.class},version = 3)
+@Database(entities = {Movie.class},version = 4)
 public abstract class AppDatabase extends RoomDatabase {
     private static final String db_name="ChecklistDB";
     private static AppDatabase instance;
@@ -17,7 +17,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public static synchronized AppDatabase getInstance(Context context){
         if(instance==null){
             instance= Room.databaseBuilder(context.getApplicationContext(),AppDatabase.class,db_name)
-                    .fallbackToDestructiveMigration().build();
+                    .fallbackToDestructiveMigration()
+                    .build();
 
         }
         return instance;

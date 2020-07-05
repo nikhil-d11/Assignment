@@ -5,11 +5,13 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.io.Serializable;
 
 @Entity(tableName = "Movies")
-public class Movie implements Serializable {
+public class Movie implements Serializable{
 
     @NotNull
     @PrimaryKey
@@ -41,6 +43,18 @@ public class Movie implements Serializable {
 
     @ColumnInfo(name = "bookmarked")
     Boolean bookmarked=false;
+
+    @ColumnInfo(name = "genres")
+    String genres;
+
+    public String getGenres() {
+
+        return genres;
+    }
+
+    public void setGenres(String genres) {
+        this.genres = genres;
+    }
 
     public Movie() {
     }

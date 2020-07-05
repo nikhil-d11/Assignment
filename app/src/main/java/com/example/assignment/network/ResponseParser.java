@@ -27,6 +27,7 @@ public class ResponseParser {
             movie.setVote_average(String.valueOf(obj.getDouble("vote_average")));
             movie.setVote_count(String.valueOf(obj.getInt("vote_count")));
             movie.setRelease_date(obj.getString("release_date"));
+            movie.setGenres(obj.getJSONArray("genre_ids").toString());
             list.add(movie);
         }
         return  list;
